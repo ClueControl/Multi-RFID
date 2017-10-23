@@ -15,25 +15,51 @@
  *
  */
 
+/*  Wiring up the RFID Readers ***
+ *  RFID readers based on the Mifare RC522 like this one:  http://amzn.to/2gwB81z
+ *  get wired up like this:
+ *
+ *  RFID pin    Arduino pin (above)
+ *  _________   ________
+ *  SDA          not used
+ *  SCK          SCK - all RFID boards connect to this one pin
+ *  MOSI         MOSI - all RFID boards connect to this one pin
+ *  MISO         MISO - all RFID boards connect to this one pin
+ *  IRQ          SDA - each RFID board needs its OWN pin on the arduino
+ *  GND          GND - all RFID connect to GND
+ *  RST          RST - all RFID boards connect to this one pin
+ *  3.3V         3v3 - all RFID connect to 3.3v for power supply
+ *
+ */
+
+
 #include <SPI.h>
 #include <MFRC522.h>
 
 #define RST_PIN         9          // Configurable, see typical pin layout above
+
+//each SS_x_PIN variable indicates the unique SS pin for another RFID reader
 #define SS_1_PIN        10         // Configurable, take a unused pin, only HIGH/LOW required, must be diffrent to SS 2
 #define SS_2_PIN        8          // Configurable, take a unused pin, only HIGH/LOW required, must be diffrent to SS 1
 #define SS_3_PIN        7          // Configurable, take a unused pin, only HIGH/LOW required, must be diffrent to SS 1
 
 
-
+//must have one SS_x_PIN for each reader connected
 #define NR_OF_READERS   3
 
 byte ssPins[] = {SS_1_PIN, SS_2_PIN,SS_3_PIN};
 
 MFRC522 mfrc522[NR_OF_READERS];   // Create MFRC522 instance.
 String read_rfid;
+
+//these are hard coded "right" card reads. You will have to change these to match
+//cards you have in inventory - even better this code should be updated
+//so that you can store new valid cards in EEProm.
+
 String ValidCard_1 = "8cc1ad85";
 String ValidCard_2 = "5efc1f2b";
 String ValidCard_3 = "1196b85";
+
 boolean Card_1_ok = false;
 boolean Card_2_ok = false;
 boolean Card_3_ok = false;
