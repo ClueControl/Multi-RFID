@@ -64,14 +64,16 @@ boolean Card_1_ok = false;
 boolean Card_2_ok = false;
 boolean Card_3_ok = false;
 
+//this is the pin the relay is on, change as needed for your code
+#define DoorLockPin 4; 
+
+
 int Read1 = 9;
 int Read2 = 9;
 boolean ValidCardOrder = true;
 String Prevcard = "";
 int NoCardCnt = 0;
-int DoorLockPin = 4;
 int DoorOpenSec = 2;
-
 
 /**
  * Initialize.
