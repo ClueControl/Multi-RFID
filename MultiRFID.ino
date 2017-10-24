@@ -21,11 +21,11 @@
  *
  *  RFID pin    Arduino pin (above)
  *  _________   ________
- *  SDA          not used
+ *  SDA          SDA - each RFID board needs its OWN pin on the arduino
  *  SCK          SCK - all RFID boards connect to this one pin
  *  MOSI         MOSI - all RFID boards connect to this one pin
  *  MISO         MISO - all RFID boards connect to this one pin
- *  IRQ          SDA - each RFID board needs its OWN pin on the arduino
+ *  IRQ          not used
  *  GND          GND - all RFID connect to GND
  *  RST          RST - all RFID boards connect to this one pin
  *  3.3V         3v3 - all RFID connect to 3.3v for power supply
